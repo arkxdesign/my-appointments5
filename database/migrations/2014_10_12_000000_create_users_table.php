@@ -27,10 +27,11 @@ class CreateUsersTable extends Migration
             $table->string('phone',100)->nullable;
             $table->string('phone2',100)->nullable;
 
-            $table->string('role',100); // 'admin', 'patient', 'doctor'
+            $table->string('role',100)->default('patient'); // 'admin', 'patient', 'doctor'
 
             $table->rememberToken();
             $table->timestamps();
+            $table->engine = 'InnoDB'; // !! Aquii 
         });
     }
 
