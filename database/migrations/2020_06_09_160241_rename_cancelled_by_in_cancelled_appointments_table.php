@@ -11,23 +11,23 @@ class RenameCancelledByInCancelledAppointmentsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('cancelled_appointments', function (Blueprint $table) {
+    // public function up()
+    //{
+//        Schema::table('cancelled_appointments', function (Blueprint $table) {
             
-            $table->renameColumn('cancelled_by', 'cancelled_by_id');
-        });
-    }
+//            $table->renameColumn('cancelled_by', 'cancelled_by_id');
+//        });
+ //   }
 
     /**
      * Reverse the migrations.
      *
-     * @return void
+   //  * @return void
      */
-    public function down()
-    {
-        Schema::table('cancelled_appointments', function (Blueprint $table) {
-            $table->renameColumn('cancelled_by_id', 'cancelled_by'); 
-        });
-    }
+  //  public function down()
+   // {
+     //   Schema::table('cancelled_appointments', function (Blueprint $table) {
+       //     $table->renameColumn('cancelled_by_id', 'cancelled_by'); 
+        //});
+   // }
 }
