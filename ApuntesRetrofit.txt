@@ -1,0 +1,19 @@
+HTTP requests (Android)
+
+
+Sin dependencias
+- Asynctask
+- Thread
+
+
+Retrofit
+- URL base
+- Rutas
+- Parámetros
+- Callback
+- Converter -> JSON a Objetos     Convertidor GsonConverter
+
+- Interceptor
+- RxAndroid
+
+{"name":"Juan", "edad":23}

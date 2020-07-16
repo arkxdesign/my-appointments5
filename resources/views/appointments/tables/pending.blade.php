@@ -76,7 +76,7 @@
                       
                     </td>
                   </tr>
-                 tr><td class="thead-light" >Observaciones: </td>
+                 <tr><td class="thead-light" >Observaciones: </td>
                   <td colspan="6"><div style="white-space:nowrap; overflow:hidden; text-overflow: ellipsis; width:400px;"> {{ $appointment->description }}</div> </td>
                   </tr>
                   @endforeach
