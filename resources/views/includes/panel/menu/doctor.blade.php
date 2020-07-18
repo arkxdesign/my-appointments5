@@ -16,3 +16,9 @@
     <span class="nav-link-text">Mis pacientes</span>
   </a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="#">
+    <i class="ni ni-satisfied text-info"></i>
+    <span class="nav-link-text">Test Menu</span>
+  </a>
+</li>
