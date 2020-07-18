@@ -1,5 +1,5 @@
 <li class="nav-item">
-  <a class="nav-link active" href="/schedule">
+  <a class="nav-link active" href="{{ url('schedule' )}}">
     <i class="ni ni-calendar-grid-58 text-danger"></i>
     <span class="nav-link-text">Gestionar horario</span>
   </a>
