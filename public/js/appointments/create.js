@@ -40,11 +40,12 @@
 
     function displayHours(data){
       if (!data.morning && !data.afternoon ||
-        data.morning.length===0 && data.afternoon.length===0) {
+        data.morning.length==0 && data.afternoon.length==0) {
 
         $hours.html(noHoursAlert);
           return;
       }
+
       let htmlHours = '';
       iRadio = 0;
 
