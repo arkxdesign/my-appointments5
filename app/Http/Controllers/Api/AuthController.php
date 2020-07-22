@@ -17,10 +17,10 @@ class AuthController extends Controller
 		    $user = Auth::guard('api')->user();
 		    $jwt = JwtAuth::generateToken($user);
     		$success = true;
-    // Return successfull sign in response with the generated jwt.
+            
+            // Return successfull sign in response with the generated jwt.
     		return compact('success', 'user', 'jwt');
 		} else {
-
 		    // Return response for failed attempt...
 		    $success = false;
 		    $message = 'Invalid credentials';
