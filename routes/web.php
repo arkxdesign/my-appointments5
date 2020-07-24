@@ -51,5 +51,5 @@ Route::middleware('auth')->group(function() {
 	
 	Route::post('/appointments/{appointment}/confirm', 'AppointmentController@postConfirm');
 	
-
+	
 });
