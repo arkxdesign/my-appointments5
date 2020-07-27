@@ -13,6 +13,7 @@
 
     $speciality.change(() => {
       const specilityId = $speciality.val();
+      //const url = `/specialties/${specilityId}/doctors`; // Alt+96  `` Apostrofe en diagonal
       const url = `/api/specialties/${specilityId}/doctors`; // Alt+96  `` Apostrofe en diagonal
       $.getJSON(url, onDoctorsLoaded);
     });
@@ -34,6 +35,7 @@
     function loadHours() {
        const selectedDate = $date.val();
        const doctorId = $doctor.val();
+       //const url = `/schedule/hours?date=${selectedDate}&doctor_id=${doctorId}`; // Alt+96  `` Apostrofe en diagonal
        const url = `/api/schedule/hours?date=${selectedDate}&doctor_id=${doctorId}`; // Alt+96  `` Apostrofe en diagonal
       $.getJSON(url, displayHours);
     }
