@@ -133,10 +133,6 @@
               <div class="chart"></div>
         </div>
 
-
-         
-
-
 @endsection
  
 @section('scripts')

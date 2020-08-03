@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
 use App\Speciality;
 use App\Appointment;
 use App\CancelledAppointment;
 
 use App\Interfaces\ScheduleServiceInterface;
+use App\Http\Requests\StoreAppointment;
+
 use Carbon\carbon;
 use Validator;
 
@@ -92,61 +93,14 @@ class AppointmentController extends Controller
 	    		);
 	}
 
-	public function store(Request $request, ScheduleServiceInterface $scheduleService)
+	public function store(StoreAppointment $request)
 	{
-		$rules = [
-			'description' => 'required',
-			'speciality_id' => 'exists:specialities,id',
-			'doctor_id' => 'exists:users,id',
-			'scheduled_time' => 'required'
-		];
-		$messages =[
-			'scheduled_time.required' => 'Por favor seleccione una hora válida para su cita, si no hay hora disponible seleccione otra fecha o doctor.'
-		];
-		$validator = Validator::make($request->all(), $rules, $messages);
+		$created = Appointment::createForPatient($request, auth()->id());
+		if ($created)
+			$notification = 'La cita se ha registrado correctamente!';
+		else
+			$notification = 'Ocurrió un problema al registrar la cita médica.';
 
-		$validator->after(function ($validator) use ($request, $scheduleService) {
-			$date = $request->input('scheduled_date');
-			$doctorId = $request->input('doctor_id');
-			$scheduled_time = $request->input('scheduled_time');
-			if($date && $doctorId && $scheduled_time) {
-				$start = new Carbon($scheduled_time);
-
-			} else {
-
-				return;
-			
-			}
-
-			if (!$scheduleService->isAvailableInterval($date, $doctorId, $start)) {
-				$validator->errors()
-					->add('available_time', 'Lo sentimos alguien mas acaba de reservar esta hora!');
-			}
-		});
-
-		if ($validator->fails()) {
-			return back()
-					->withErrors($validator)
-					->withInput();	
-		}
-
-		$data = $request->only([
-	    	'description',
-	    	'speciality_id',
-	    	'doctor_id',
-	    	'scheduled_date',
-	    	'scheduled_time',
-	    	'type'
-	  		
-	    ]);
-		$data['patient_id'] = auth()->id();
-		// rigth time format
-		$carbontime = Carbon::createFromFormat('g:i A', $data['scheduled_time']);
-		$data['scheduled_time'] = $carbontime->format('H:i:s');
-
-		Appointment::create($data);
-
-		$notification = 'La cita se ha registrado correctamente!';
 		return back()->with(compact('notification'));
 		// return redirect('/appointments');
 	}
