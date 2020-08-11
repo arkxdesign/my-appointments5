@@ -20,10 +20,23 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
+    // Cantidad de intentos permitidos antes de bloquear al usuario
+    public $maxAttempts = 3;
+    // Minutos de bloqueo
+    public $decayMinutes = 2;
+
+    public function authenticated(Requests $requests, $user)
+    {
+        $user->update([
+            'ultimo_login' => Carbon::now()->toDateTimeString(),
+            'ip' => $request->getClientIp()
+        ]);
+    }
+
+    /** 
      * Where to redirect users after login.
      *
-     * @var string
+      @var string
      */
     protected $redirectTo = '/home';
 

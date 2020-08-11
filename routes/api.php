@@ -1,6 +1,7 @@
 <?php
 
     Route::post('/login', 'AuthController@login');
+    Route::post('/register', 'AuthController@register');
 
 // Public Data
 	Route::get('/specialties', 'ApiSpecialityController@index');
