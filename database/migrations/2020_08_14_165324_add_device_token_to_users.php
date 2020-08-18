@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class AddDeviceTokenToUsers extends Migration
 {
     /**
-     * Run the migrations.
-     *
+     * Run the migrations
      * @return void
      */
     public function up()
@@ -16,11 +15,9 @@ class AddDeviceTokenToUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('device_token')->nullable();
         });
-    }
-
+    }                                                                                                            
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
