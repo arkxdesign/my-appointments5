@@ -56,13 +56,7 @@
                     </form>
                     @endif 
                       {{-- patient --}}
-                        <form action="{{ url('/appointments/'.$appointment->id.'/confirm')}}" method="POST" class="d-inline-block">
-                          @csrf
-                          <button  class="btn btn-sm btn-success" type="submit" data-toggle="tooltip" data-placement="top" title="Confirmar cita">
-                            <i class="ni ni-check-bold"></i>
-                          </button>
-                        </form>
-                        <form action="{{ url('/appointments/'.$appointment->id.'/cancel') }}" method="POST" class="d-inline-block">
+                      <form action="{{ url('/appointments/'.$appointment->id.'/cancel') }}" method="POST" class="d-inline-block">
                           @csrf
                           <button  class="btn btn-sm btn-danger" type="submit" data-toggle="tooltip" data-placement="top" title="Cancelar cita">
                             <i class="ni ni-fat-delete"></i>
