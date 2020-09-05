@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -91,6 +90,16 @@ class User extends Authenticatable
     public function asPatientAppointments()
     {
         return $this->hasMany(Appointment::class, 'patient_id');
+    }
+
+    public function sendFCM($message)
+    {
+        return fcm()->to([
+            $this->device_token
+        ])->notification([
+            'title' => config('app.name'),
+            'body' => $message
+        ])->send();
     }
 
 }
