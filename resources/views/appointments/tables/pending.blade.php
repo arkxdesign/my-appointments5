@@ -68,10 +68,6 @@
                             <i class="ni ni-fat-delete"></i>
                           </button>
                         </form>  
-                       @endif                   
-                   
-                                     
-                      
                     </td>
                   </tr>
                  <tr><td class="thead-light" >Observaciones: </td>
