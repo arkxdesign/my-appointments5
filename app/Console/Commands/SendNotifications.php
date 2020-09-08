@@ -13,7 +13,7 @@ class SendNotifications extends Command
      *
      * @var string
      */
-    protected $signature = 'notifications:send';
+    protected $signature = 'fcm:send';
 
     /**
      * The console command description.
@@ -48,17 +48,18 @@ class SendNotifications extends Command
         // scheduled_date 2018-12-02
         // scheduled_time 15:00:00
      
-          $appointmentsTomorrow = $this->getAppointments24Hours($now);
+         $appointmentsTomorrow = $this->getAppointments24Hours($now);
                
-        foreach ($appointments as $appointment) {
+        foreach ($appointmentsTomorrow as $appointment) {
             $appointment->patient->sendFCM('No olvides tu cita de mañana, saludos.');
+            $this->info('Mensaje FCM enviado 24h antes al paciente (ID:)' . $appointment->patient_id);
         }
         
         $appointmentsNextHour = $this->getAppointmentsNextHour($now);
                
-        foreach ($appointments as $appointment) {
+        foreach ($appointmentsNextHour as $appointment) {
             $appointment->patient->sendFCM('Tienes una cita en 1 hora. Te esperamos.');
-
+            $this->info('Mensaje FCM enviado faltando 1h al paciente (ID:)' . $appointment->patient_id);
         }
 
     }
@@ -70,7 +71,8 @@ class SendNotifications extends Command
             ->where('scheduled_time', '>=', $now->copy()->subMinutes(3)->toTimeString())
             ->where('scheduled_time', '<', $now->copy()->addMinutes(2)->toTimeString())
             ->get(['id', 'scheduled_date', 'scheduled_time', 'patient_id'])
-            ->toArray()
+            ->toArray();
+
     }
 
 
@@ -81,6 +83,6 @@ class SendNotifications extends Command
             ->where('scheduled_time', '>=', $now->copy()->subMinutes(3)->toTimeString())
             ->where('scheduled_time', '<', $now->copy()->addMinutes(2)->toTimeString())
             ->get(['id', 'scheduled_date', 'scheduled_time', 'patient_id'])
-            ->toArray()
-    }
+            ->toArray();
+   }
 }
