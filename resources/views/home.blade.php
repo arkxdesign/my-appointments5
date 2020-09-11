@@ -78,7 +78,11 @@
       
     </div>
 
+@endsection
 
-
-
+@section('scripts')
+<script>
+ const appointmentsByDay = @json($appointmentsByDay);
+</script>
+<script src="{{ asset('js/charts/home.js') }}"></script>
 @endsection
