@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function show()
     {
-    	return Auth::guard('api')->user();
+	 	return Auth::guard('api')->user();
     }
 
     public function update(Request $request)
@@ -21,5 +21,7 @@ class UserController extends Controller
     	$user->phone = $request->phone;
     	$user->address = $request->address;
     	$user->save();
+
+    	JwtAuth::clearCache($user);
     }
 }
