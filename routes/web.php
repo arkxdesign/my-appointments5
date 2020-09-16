@@ -40,19 +40,22 @@ Route::post('/schedule', 'ScheduleController@store');
 });
 
 Route::middleware('auth')->group(function() {
+// Patient
+Route::get('/profile', 'UserController@Edit');
+Route::post('/profile', 'UserController@update');
+
+Route::middleware('phone')->group(function () {
 	Route::get('/appointments/create', 'AppointmentController@create');
 	Route::post('/appointments', 'AppointmentController@store');
-	/*
-	/patient/appointments
-	-> que variables pasar a la vista
-	*/
-	Route::get('/appointments', 'AppointmentController@index');
-	Route::get('/appointments/{appointment}', 'AppointmentController@show');
+});
 
-	Route::get('/appointments/{appointment}/cancel', 'AppointmentController@showCancelForm');
-	Route::post('/appointments/{appointment}/cancel', 'AppointmentController@postCancel');
-	
-	Route::post('/appointments/{appointment}/confirm', 'AppointmentController@postConfirm');
+Route::get('/appointments', 'AppointmentController@index');
+Route::get('/appointments/{appointment}', 'AppointmentController@show');
+
+Route::get('/appointments/{appointment}/cancel', 'AppointmentController@showCancelForm');
+Route::post('/appointments/{appointment}/cancel', 'AppointmentController@postCancel');
+
+Route::post('/appointments/{appointment}/confirm', 'AppointmentController@postConfirm');
 	
 	
 });
