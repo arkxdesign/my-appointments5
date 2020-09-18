@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Speciality;
 use App\Appointment;
 use App\CancelledAppointment;
+use App\User;
 
 use App\Interfaces\ScheduleServiceInterface;
 use App\Http\Requests\StoreAppointment;
@@ -16,8 +17,9 @@ use Validator;
 
 class AppointmentController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
+
 		$role = auth()->user()->role;
 
 		//Admin ->all
@@ -27,8 +29,13 @@ class AppointmentController extends Controller
 		$confirmedAppointments = Appointment::where('status', 'Confirmada')
 			->paginate(10);
 		$oldAppointments = Appointment::whereIn('status', ['Atendida', 'Cancelada'])
-			->orderBy('updated_at', 'desc')
-			->paginate(10);		
+			->orderBy('id', 'desc')
+			->paginate(10);
+
+		$search  = $request->get('buscarpor');
+		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);
+
+
 		//Doctor
 		}elseif ($role == 'doctor') {
 		$pendingAppointments = Appointment::where('status', 'Reservada')
@@ -41,6 +48,9 @@ class AppointmentController extends Controller
 			->where('doctor_id', auth()->id())
 			->orderBy('updated_at', 'desc')
 			->paginate(10);		
+
+		$search  = $request->get('buscarpor');
+		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);	
 		
 		}elseif ($role == 'patient') {
 		//Patient
@@ -49,17 +59,20 @@ class AppointmentController extends Controller
 			->paginate(10);
 		$confirmedAppointments = Appointment::where('status', 'Confirmada')
 			->where('patient_id', auth()->id())
+			->orderBy('id','desc')
 			->paginate(10);
-		$oldAppointments = Appointment::whereIn('status', ['Atendida', 'Cancelada'])
+		$oldAppointments = Appointment::whereIn('status', ['Atendida','Confirmada', 'Cancelada'])
 			->where('patient_id', auth()->id())
-			->orderBy('updated_at', 'desc')
+			->orderBy('id', 'desc')
 			->paginate(10);
+
+		$search  = $request->get('buscarpor');
+		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);
 
 		}
-		
 
 		return view('appointments.index',
-			compact('pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role'));
+			compact('appointments','pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role'));
 	}
 
 	public function show(Appointment $appointment)

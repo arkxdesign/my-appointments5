@@ -32,7 +32,16 @@
                       {{ $appointment->scheduled_time_12 }}
                     </td>
                     <td>
-                      {{ $appointment->status }}
+                        @if  ($appointment->status == 'Cancelada')
+                          <div class="text-danger">
+                          {{ $appointment->status }}
+                          </div>
+                        @else  
+                          <div class="text-success">
+                          {{ $appointment->status }}
+                          </div>  
+                       @endif
+
                     </td>
                     <td>
                       {{ $appointment->updated_at->format('Y-m-d') }} - {{ $appointment->updated_at->format('g:i A') }}

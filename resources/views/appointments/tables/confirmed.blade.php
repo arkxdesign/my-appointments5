@@ -4,6 +4,7 @@
               <table class="table align-items-center table-flush" >
                 <thead class="thead-light">
                   <tr>
+                    <th scope="col">Cita #</th>
                     <th scope="col">Especialidad</th>
                     @if ($role == 'patient' || $role == 'admin')
                     <th scope="col">Médico</th>
@@ -21,6 +22,9 @@
                   @foreach ($confirmedAppointments as $appointment)
                   <tr>
                     <th scope="row">
+                      {{ $appointment->id }}
+                    </th>
+                    <th>
                       {{ $appointment->speciality->name }}
                     </th>
                     
@@ -54,18 +58,9 @@
                          href="{{ url('/appointments/'.$appointment->id.'/cancel') }}">
                         <i class="ni ni-fat-delete"></i>
                         </a>  
-
-
-                      
                     </td>
                   </tr>
-                  <tr><td class="thead-light" >Observaciones: </td>
-                  <td colspan="6"><div style="white-space:nowrap; overflow:hidden; text-overflow: ellipsis; width:400px;"> {{ $appointment->description }}</div> </td>
-
-                  </tr>
-
-                  @endforeach
-                  
+                 @endforeach
                 </tbody>
               </table>
             </div>
