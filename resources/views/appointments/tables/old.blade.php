@@ -1,10 +1,20 @@
             <div class="table-responsive">
+              
+              <nav class="navbar navbar-light float-right">
+                <form class="form-inline">
+
+                  <input name="searchId" class="form-control mr-sm-2" type="search" placeholder="Buscar por ID" aria-label="Search">
+
+                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+              </nav>
               <!-- Projects table -->
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Cita #</th>
                     <th scope="col">Doctor</th>
+                    <th scope="col">Paciente</th>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Fecha Cita</th>
                     <th scope="col">Hora</th>
@@ -22,6 +32,9 @@
                     <th scope="row">
                       {{ $appointment->doctor->name }}
                     </th>
+                    <td>
+                      {{ $appointment->patient->name }}
+                    </td>
                     <td>
                       {{ $appointment->speciality->name }}
                     </td>

@@ -16,30 +16,27 @@
                 <strong>{{ session('notification') }}</strong> 
               </div>
               @endif
-
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" data-toggle="tab" href="#confirmed-appointments" role="tab" aria-controls="nav-home" aria-selected="true">Mis próximas citas</a>
+                  <a class="nav-item nav-link active"  data-toggle="tab" href="#old-appointments" role="tab" >Historial de citas</a>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#confirmed-appointments" role="tab" aria-controls="nav-home" aria-selected="true">Mis próximas citas</a>
                   <a class="nav-item nav-link"  data-toggle="tab" href="#pending-appointments" role="tab" >Citas por confirmar</a>
-                  <a class="nav-item nav-link"  data-toggle="tab" href="#old-appointments" role="tab" >Historial de citas</a>
-            
                 </div>
               </nav>
 
               <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="confirmed-appointments" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active" id="old-appointments" role="tabpanel" aria-labelledby="nav-home-tab">
+                  @include('appointments.tables.old')
+                </div>
+                <div class="tab-pane fade" id="confirmed-appointments" role="tabpanel" aria-labelledby="nav-profile-tab">
                   @include('appointments.tables.confirmed')
                 </div>
                 <div class="tab-pane fade" id="pending-appointments" role="tabpanel" aria-labelledby="nav-profile-tab">
                   @include('appointments.tables.pending')
                 </div>
-                <div class="tab-pane fade" id="old-appointments" role="tabpanel" aria-labelledby="nav-profile-tab">
-                  @include('appointments.tables.old')
-                </div>
               </div>
-
-
           </div>
+        </div>
           <div class="card-body"> 
              
           </div>

@@ -28,13 +28,12 @@ class AppointmentController extends Controller
 			->paginate(10);
 		$confirmedAppointments = Appointment::where('status', 'Confirmada')
 			->paginate(10);
-		$oldAppointments = Appointment::whereIn('status', ['Atendida', 'Cancelada'])
+		$oldAppointments = Appointment::whereIn('status', ['Atendida','Confirmada', 'Cancelada'])
 			->orderBy('id', 'desc')
-			->paginate(10);
+			->paginate(50);
 
-		$search  = $request->get('buscarpor');
-		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);
-
+		$search  = $request->get('searchId');
+		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
 
 		//Doctor
 		}elseif ($role == 'doctor') {
@@ -44,14 +43,14 @@ class AppointmentController extends Controller
 		$confirmedAppointments = Appointment::where('status', 'Confirmada')
 			->where('doctor_id', auth()->id())
 			->paginate(10);
-		$oldAppointments = Appointment::whereIn('status', ['Atendida', 'Cancelada'])
+		$oldAppointments = Appointment::whereIn('status', ['Atendida','Confirmada', 'Cancelada'])
 			->where('doctor_id', auth()->id())
 			->orderBy('updated_at', 'desc')
-			->paginate(10);		
+			->paginate(50);		
 
-		$search  = $request->get('buscarpor');
-		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);	
-		
+		$search  = $request->get('searchId');
+		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
+
 		}elseif ($role == 'patient') {
 		//Patient
 		$pendingAppointments = Appointment::where('status', 'Reservada')
@@ -66,13 +65,13 @@ class AppointmentController extends Controller
 			->orderBy('id', 'desc')
 			->paginate(10);
 
-		$search  = $request->get('buscarpor');
-		$appointments = Appointment::where('id', 'like', "$%search%")->paginate(10);
-
+		$search  = $request->get('searchId');
+		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
+		
 		}
 
 		return view('appointments.index',
-			compact('appointments','pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role'));
+			compact('pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role', 'appointments'));
 	}
 
 	public function show(Appointment $appointment)
