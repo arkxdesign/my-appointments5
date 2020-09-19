@@ -16,12 +16,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
 		$rules = [
-    		'phone' => 'required|min:10|numeric'
+    		'phone' => 'required|numeric|digits:10|string'
 	  	];
 
 	  	$messages = [
 	  		'phone.required' => 'Captura un numero de celular',
-            'phone.min' => 'Captura minimo 10 digitos en el numero de celular',
+            'phone.digits' => 'Captura minimo 10 digitos en el numero de celular',
 	    	'phone.numeric' => 'Captura 10 digitos numericos, sin espacios o caracteres'
         ];
 
