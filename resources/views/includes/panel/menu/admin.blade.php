@@ -1,5 +1,5 @@
 <li class="nav-item">
-  <a class="nav-link active" href="{{ route('home') }}">
+  <a class="nav-link active" href="{{ url('home') }}">
     <i class="ni ni-tv-2 text-primary"></i>
     <span class="nav-link-text">Dashboard</span>
   </a>

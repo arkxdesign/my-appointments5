@@ -33,8 +33,9 @@
                 </div>
                 <div class="tab-pane fade" id="pending-appointments" role="tabpanel" aria-labelledby="nav-profile-tab">
                   @include('appointments.tables.pending')
-                </div>
+                </div>                
               </div>
+              
           </div>
         </div>
           <div class="card-body"> 

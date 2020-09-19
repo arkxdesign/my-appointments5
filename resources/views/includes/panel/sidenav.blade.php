@@ -1,14 +1,14 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="searchId" action="{{ url('appointments/page') }}" method="GET" >
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative input-group-merge">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
               
-                <input name="buscarpor" class="form-control" placeholder="Search" type="search" aria-label="Search">
+                <input name="searchId" id="searchId" class="form-control" placeholder="Buscar cita por folio" type="search" aria-label="Search">
               
               </div>
             </div>

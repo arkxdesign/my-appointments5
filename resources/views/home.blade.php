@@ -70,16 +70,9 @@
       </div>
     </div>
     @endif
-
-
-
-    <div class="row mt-5">
-    </div>
-      
     </div>
 
 @endsection
-
 @section('scripts')
 <script>
  const appointmentsByDay = @json($appointmentsByDay);

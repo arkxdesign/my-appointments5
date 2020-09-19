@@ -1,5 +1,24 @@
-             
-             <div class="table-responsive">
+@extends('layouts.panel')
+@section('content')
+
+           <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                 <h3 class="mb-0">Buscar citas por folio</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              @if(session('notification'))
+              <div class="alert alert-success" role="alert">
+                <strong>{{ session('notification') }}</strong> 
+              </div>
+              @endif
+
+            <div class="table-responsive">
+                          
               <!-- Projects table -->
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
@@ -15,7 +34,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($oldAppointments as $appointment)
+                @if (count($searchId))
+                  @foreach ($searchId as $appointment)
                   <tr>
                     <td>
                       <div class="text-blue">
@@ -55,11 +75,28 @@
                       </a>
                     </td>
                   </tr>
+
                   @endforeach
+                @endif
+                  
                 </tbody>
               </table>
             </div>
-          
+
             <div class="card-body"> 
-               {{ $oldAppointments->links() }}
+   
             </div>
+         
+          </div>
+          <div class="card-body"> 
+             
+          </div>
+        </div>
+        <div class="col-md-12 mb-1">
+              <!-- Chart -->
+              <div class="chart"></div>
+        </div>
+  
+ 
+ @endsection
+

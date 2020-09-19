@@ -17,7 +17,8 @@ use Validator;
 
 class AppointmentController extends Controller
 {
-	public function index(Request $request)
+	
+	public function index()
 	{
 
 		$role = auth()->user()->role;
@@ -32,8 +33,6 @@ class AppointmentController extends Controller
 			->orderBy('id', 'desc')
 			->paginate(50);
 
-		$search  = $request->get('searchId');
-		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
 
 		//Doctor
 		}elseif ($role == 'doctor') {
@@ -48,9 +47,6 @@ class AppointmentController extends Controller
 			->orderBy('updated_at', 'desc')
 			->paginate(50);		
 
-		$search  = $request->get('searchId');
-		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
-
 		}elseif ($role == 'patient') {
 		//Patient
 		$pendingAppointments = Appointment::where('status', 'Reservada')
@@ -64,17 +60,14 @@ class AppointmentController extends Controller
 			->where('patient_id', auth()->id())
 			->orderBy('id', 'desc')
 			->paginate(10);
-
-		$search  = $request->get('searchId');
-		$appointments = User::where('name', 'like', "$%search%")->paginate(10);
-		
+	
 		}
 
 		return view('appointments.index',
-			compact('pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role', 'appointments'));
+			compact('pendingAppointments', 'confirmedAppointments', 'oldAppointments', 'role'));
 	}
 
-	public function show(Appointment $appointment)
+		public function show(Appointment $appointment)
 	{
 		$role = auth()->user()->role;
 		return view('appointments.show', compact('appointment', 'role'));
@@ -159,4 +152,51 @@ class AppointmentController extends Controller
 		return redirect('/appointments')->with(compact('notification'));
 	}
 
+	public function buscador(Request $request){
+
+	$role = auth()->user()->role;
+
+		//Admin ->all
+		if ($role == 'admin') {
+		$search  = $request->get('searchId');
+        $searchId = Appointment::where('id', 'like', "%$search%")
+        ->take(20)
+        ->get();		
+
+		//Doctor
+		}elseif ($role == 'doctor') {
+		$search  = $request->get('searchId');
+        $searchId = Appointment::where('id', 'like', "%$search%")
+        ->where('doctor_id', auth()->id())
+        ->take(20)
+        ->get();
+
+		}elseif ($role == 'patient') {
+		
+		$search  = $request->get('searchId');
+        $searchId = Appointment::where('id', 'like', "%$search%")
+        ->where('patient_id', auth()->id())
+        ->take(20)
+        ->get();
+
+		}	
+
+		
+        //->paginate(10);
+
+			//$searchId = Appointment::where("id", "like", $request->searchId."%")
+			//->where('patient_id', auth()->id())
+			//->orderBy('id','desc')
+			//->get();
+			//->paginate(10);
+			
+		//dd($searchId);
+
+        return view('appointments.page', compact('role', 'searchId'));
+    
+	}
+
 }
+
+
+

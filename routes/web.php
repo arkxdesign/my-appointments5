@@ -49,8 +49,14 @@ Route::middleware('phone')->group(function () {
 	Route::post('/appointments', 'AppointmentController@store');
 });
 
+
+
 Route::get('/appointments', 'AppointmentController@index');
+// RUTA PARA EL BUSCADOR
+Route::get('/appointments/page', 'AppointmentController@buscador');
+
 Route::get('/appointments/{appointment}', 'AppointmentController@show');
+
 
 Route::get('/appointments/{appointment}/cancel', 'AppointmentController@showCancelForm');
 Route::post('/appointments/{appointment}/cancel', 'AppointmentController@postCancel');

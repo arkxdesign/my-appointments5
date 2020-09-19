@@ -10,4 +10,5 @@ class CancelledAppointment extends Model
     {	// belongsTo Cancellation N - 1 User hasMany
     	return $this->belongsTo(User::class);
     }
+
 }
