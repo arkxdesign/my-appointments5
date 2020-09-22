@@ -11,8 +11,8 @@
   </a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="{{ url('patients' )}}">
+  <a class="nav-link" href="{{ url('home' )}}">
     <i class="ni ni-satisfied text-info"></i>
-    <span class="nav-link-text">Mis pacientes</span>
+    <span class="nav-link-text">Mejor día</span>
   </a>
 </li>
