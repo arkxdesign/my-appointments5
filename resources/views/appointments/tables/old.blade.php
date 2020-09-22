@@ -38,12 +38,16 @@
                       {{ $appointment->scheduled_time_12 }}
                     </td>
                     <td>
-                        @if  ($appointment->status == 'Cancelada')
-                          <div class="text-danger">
+                        @if  ($appointment->status == 'Atendida')
+                          <div class="text-blue">
                           {{ $appointment->status }}
                           </div>
-                        @else  
+                        @elseif ($appointment->status == 'Confirmada')  
                           <div class="text-success">
+                          {{ $appointment->status }}
+                          </div>
+                        @elseif  ($appointment->status == 'Cancelada')
+                          <div class="text-danger">
                           {{ $appointment->status }}
                           </div>  
                        @endif

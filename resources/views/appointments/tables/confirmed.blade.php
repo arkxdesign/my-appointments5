@@ -53,7 +53,15 @@
                        <a class="btn btn-sm btn-primary" href="{{ url('/appointments/'.$appointment->id) }}"  data-toggle="tooltip" data-placement="top" title="Ver detalle de la cita">
                         <i class="ni ni-zoom-split-in"></i>
                        </a>
-                      @endif     
+                      @endif
+                      @if ($role == 'doctor' || $role == 'admin')
+                      <form action="{{ url('/appointments/'.$appointment->id.'/attended')}}" method="POST" class="d-inline-block">
+                        @csrf
+                        <button  class="btn btn-sm btn-success" type="submit" data-toggle="tooltip" data-placement="top" title="Atendida">
+                          <i class="ni ni-check-bold"></i>
+                        </button>
+                      </form>
+                      @endif
                         <a class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Cancelar cita"
                          href="{{ url('/appointments/'.$appointment->id.'/cancel') }}">
                         <i class="ni ni-fat-delete"></i>

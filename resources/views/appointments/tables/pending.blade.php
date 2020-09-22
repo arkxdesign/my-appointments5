@@ -54,7 +54,8 @@
                         <i class="ni ni-check-bold"></i>
                       </button>
                     </form>
-                    @endif 
+                    @endif
+                     
                       {{-- patient --}}
                       <form action="{{ url('/appointments/'.$appointment->id.'/cancel') }}" method="POST" class="d-inline-block">
                           @csrf

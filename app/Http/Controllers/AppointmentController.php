@@ -152,6 +152,19 @@ class AppointmentController extends Controller
 		return redirect('/appointments')->with(compact('notification'));
 	}
 
+		public function postAttended(Appointment $appointment)
+	{
+		
+		$appointment->status = 'Atendida';
+		$saved = $appointment->save(); // update
+
+		if ($saved)
+			$appointment->patient->sendFCM('Gracias por su visita!');
+
+		$notification = 'La cita se ha marcado como atendida correctamente.';
+		return redirect('/appointments')->with(compact('notification'));
+	}
+
 	public function buscador(Request $request){
 
 	$role = auth()->user()->role;
@@ -180,9 +193,6 @@ class AppointmentController extends Controller
         ->get();
 
 		}	
-
-		
-        //->paginate(10);
 
 			//$searchId = Appointment::where("id", "like", $request->searchId."%")
 			//->where('patient_id', auth()->id())

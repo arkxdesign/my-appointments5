@@ -62,6 +62,7 @@ Route::get('/appointments/{appointment}/cancel', 'AppointmentController@showCanc
 Route::post('/appointments/{appointment}/cancel', 'AppointmentController@postCancel');
 
 Route::post('/appointments/{appointment}/confirm', 'AppointmentController@postConfirm');
+Route::post('/appointments/{appointment}/attended', 'AppointmentController@postAttended');
 	
 	
 });
